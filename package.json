@@ -7,7 +7,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@packy-tang/vue-tinymce": "^2.0.0-beta.1",
+    "tinymce": "^6.0.1",
     "vue": "^3.0.0",
+    "vue-loader-v16": "^16.0.0-beta.5.4",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
