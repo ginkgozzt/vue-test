@@ -1,7 +1,19 @@
 module.exports = {
   publicPath: '/zzt',
   outputDir: 'dist',
-  assetsDir: 'static'
+  assetsDir: 'static',
+  configureWebpack:{
+    module: {
+        rules: [
+            {
+                test: /\.mjs$/,
+                include: /node_modules/,
+                type: "javascript/auto"
+            },
+        ]
+    }
+}
+
 
    
 }

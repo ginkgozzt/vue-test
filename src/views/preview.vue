@@ -15,6 +15,7 @@
 </template>
 <script>
   const docx = require('docx-preview');
+  const jszip = require('jszip');
   export default {
     data() {
       return {
@@ -26,18 +27,27 @@
         let div = document.createElement('div');
         div.className = 'box'
         docx.renderAsync(this.$refs.file.files[0], div) // 渲染到页面预览
-        this.$refs.preview.appendChild(div)
+        this.$refs.preview.appendChild(div);
+        this.download(this.$refs.file.files[0],'docx')
       },
       previewPDf() {
         let container = this.$refs.pdffile;
         let file = container.files[0];
-     
         let url = encodeURIComponent(URL.createObjectURL(file));
         this.pdfSrc = '/pdfjs/web/viewer.html?file=' + url;
         console.log('url :>> ', url);
-       
-     
-      
+        this.download(file, 'pdf')
+      },
+      download(file, type) {
+          let url = URL.createObjectURL(file);
+        console.log(url,'url')
+        let link = document.createElement('a');
+        link.href = url;
+        link.style.display = 'none';
+        link.download = 'aaa.' + type;
+        document.body.appendChild(link);
+        link.click();
+        
       }
     }
   };
