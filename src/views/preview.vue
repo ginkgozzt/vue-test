@@ -1,5 +1,29 @@
 <template>
   <div class="my-component" ref="preview">
+    <el-upload 
+      ref="uploadRef" 
+      class="upload-demo" 
+      :on-change="changeFile"
+      :before-upload="beforeUpload"
+      :auto-upload="false"
+      action="/" 
+      >
+      <template #trigger>
+        <el-button type="primary">select file</el-button>
+      </template>
+      <el-button class="ml-3" type="success" @click="submitUpload">
+        upload to server
+      </el-button>
+      <template #tip>
+        <div class="el-upload__tip">
+          jpg/png files with a size less than 500kb
+        </div>
+      </template>
+    </el-upload>
+
+    <div>
+       <el-button type="primary"  @click="previewPDfTest">pdf预览</el-button>
+    </div>
     <div>
       <span>pdf预览</span>
       <input type="file" @change="previewPDf" ref="pdffile">
@@ -17,18 +41,56 @@
   const docx = require('docx-preview');
   const jszip = require('jszip');
   export default {
+   
     data() {
       return {
         pdfSrc: ''
       }
     },
     methods: {
+      submitUpload(){
+        let uploadRef = this.$refs.uploadRef;
+        console.log('uploadRef :>> ', uploadRef,uploadRef.value);
+      },
+      beforeUpload(file){
+        console.log('file :>>333', file);
+        return false;
+
+
+      },
+      changeFile(file){
+        if(file.status === 'ready'){
+          this.file = file
+        };
+    
+      },
+      previewPDfTest(){
+        if(!this.file) return;
+        let {raw} = this.file;
+        console.log(' this.file :>> ',  this.file);
+        console.log('pdfjsLib :>> ', pdfjsLib);
+        var reader = new FileReader();
+        reader.readAsDataURL(raw);
+        reader.onload = e =>{
+           let target = e.target;
+           let getPdf = target.result;
+           this.getPdf(getPdf)
+             
+         }
+      },
+      async getPdf(result){
+        let pdf = await pdfjsLib.getDocument(result).then(function(pdf){
+          console.log('pdf :>> ', pdf);
+        });
+        console.log('a66666 :>> ', pdf);
+        console.log(' pdf.numPages :>> ',  pdf._transport);
+      },
       preview(e) {
         let div = document.createElement('div');
         div.className = 'box'
         docx.renderAsync(this.$refs.file.files[0], div) // 渲染到页面预览
         this.$refs.preview.appendChild(div);
-        this.download(this.$refs.file.files[0],'docx')
+        this.download(this.$refs.file.files[0], 'docx')
       },
       previewPDf() {
         let container = this.$refs.pdffile;
@@ -39,15 +101,14 @@
         this.download(file, 'pdf')
       },
       download(file, type) {
-          let url = URL.createObjectURL(file);
-        console.log(url,'url')
+        let url = URL.createObjectURL(file);
+        console.log(url, 'url')
         let link = document.createElement('a');
         link.href = url;
         link.style.display = 'none';
         link.download = 'aaa.' + type;
         document.body.appendChild(link);
         link.click();
-        
       }
     }
   };
