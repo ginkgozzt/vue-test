@@ -101,7 +101,7 @@
       reader.readAsDataURL(filesdata[0]); //将文件读取为 DataURL
       reader.onload = function(e) { //文件读取成功完成时触发
        
-        pdfjsLib.getDocument(this.result).then(function(pdf) { //调用pdf.js获取文件
+        pdfjsLib.getDocument(this.result).promise.then(function(pdf) { //调用pdf.js获取文件
           if(pdf) {
             totalPages = pdf.numPages; //获取pdf文件总页数
             $("#currentPages").text("1/");

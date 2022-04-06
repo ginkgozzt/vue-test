@@ -79,11 +79,14 @@
          }
       },
       async getPdf(result){
-        let pdf = await pdfjsLib.getDocument(result).then(function(pdf){
-          console.log('pdf :>> ', pdf);
-        });
-        console.log('a66666 :>> ', pdf);
-        console.log(' pdf.numPages :>> ',  pdf._transport);
+       
+         pdfjsLib.getDocument(result).promise.then(res =>{
+           console.log('res :>> ', res);
+         })
+        
+        
+        // console.log('a66666 :>> ', pdf);
+        // console.log(' pdf.numPages :>> ',  pdf._transport);
       },
       preview(e) {
         let div = document.createElement('div');
