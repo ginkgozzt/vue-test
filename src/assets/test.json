@@ -1,0 +1,191 @@
+{
+  "code": "0",
+  "message": "查询数据成功",
+  "data": {
+    "dataList": [
+      {
+        "id": 3,
+        "group_name": "法务根组织",
+        "gorup_code": "000002",
+        "group_type": 2,
+        "parent_group_id": 1,
+        "sort": 2,
+        "create_user_id": 0,
+        "create_time": null,
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 7,
+        "group_name": "张伟律师事务所",
+        "gorup_code": "000002001",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 1,
+        "create_user_id": null,
+        "create_time": "2022-04-06",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 8,
+        "group_name": "老毛桃律师事务所",
+        "gorup_code": "000002002",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 2,
+        "create_user_id": null,
+        "create_time": "2022-04-06",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 10,
+        "group_name": "张三律师事务所",
+        "gorup_code": "000002003",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 3,
+        "create_user_id": null,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 11,
+        "group_name": "广东厚载律师事务所",
+        "gorup_code": "000002004",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 4,
+        "create_user_id": null,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 12,
+        "group_name": "广东金际律师事务所",
+        "gorup_code": "000002005",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 5,
+        "create_user_id": null,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 13,
+        "group_name": "岳成律师事务所",
+        "gorup_code": "000002006",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 6,
+        "create_user_id": null,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 17,
+        "group_name": "业务部",
+        "gorup_code": "000002006001",
+        "group_type": 2,
+        "parent_group_id": 13,
+        "sort": 1,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 18,
+        "group_name": "王城律师事务所",
+        "gorup_code": "000002007",
+        "group_type": 2,
+        "parent_group_id": 3,
+        "sort": 7,
+        "create_user_id": null,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 19,
+        "group_name": "总经办",
+        "gorup_code": "000002006002",
+        "group_type": 2,
+        "parent_group_id": 13,
+        "sort": 2,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 20,
+        "group_name": "经理室",
+        "gorup_code": "000002006002001",
+        "group_type": 2,
+        "parent_group_id": 19,
+        "sort": 1,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 21,
+        "group_name": "业务一部",
+        "gorup_code": "000002006001001",
+        "group_type": 2,
+        "parent_group_id": 17,
+        "sort": 1,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 22,
+        "group_name": "飞鸟队",
+        "gorup_code": "000002006001002",
+        "group_type": 2,
+        "parent_group_id": 17,
+        "sort": 2,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 23,
+        "group_name": "苍蝇队",
+        "gorup_code": "000002006001003",
+        "group_type": 2,
+        "parent_group_id": 17,
+        "sort": 3,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      },
+      {
+        "id": 24,
+        "group_name": "小鸟队",
+        "gorup_code": "000002006001002001",
+        "group_type": 2,
+        "parent_group_id": 22,
+        "sort": 1,
+        "create_user_id": 27,
+        "create_time": "2022-04-07",
+        "modify_user_id": null,
+        "modify_time": null
+      }
+    ],
+    "summary": {
+      "totalRecord": 15
+    }
+  }
+}

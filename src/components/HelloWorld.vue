@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+        <el-button type="primary" @click="getTreeData">获取</el-button>
     <h1>{{ msg }}</h1>
     <div v-text="inputData"></div>
     <ul>
@@ -16,6 +17,8 @@
 </template>
 
 <script>
+import testData from '../assets/test.json'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -44,6 +47,30 @@ export default {
     // this.init();
   },
   methods:{
+    getTreeData(){
+      let dataList = testData.data.dataList;
+
+      let originData = JSON.parse(JSON.stringify(dataList));
+      let roots = originData.filter(val =>{
+        let item = originData.find(item => val.parent_group_id === item.id);
+        return !item
+      });
+      let iterationFn = (children,node) => {
+        node.children = children;
+        if(children.length > 0){
+          children.map(val =>{
+            children = originData.filter(item => item.parent_group_id === val.id);
+            iterationFn(children,val)
+          })
+        }
+
+      };
+      roots.map(val =>{
+        let children = originData.filter(item => item.parent_group_id === val.id);
+        iterationFn(children,val)
+      });
+      console.log('roots :>> ', roots);
+    },
     init(){
       let handle = {
         get: function(target,name,receiver){
