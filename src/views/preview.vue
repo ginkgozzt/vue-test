@@ -1,29 +1,29 @@
 <template>
-  <div class="my-component" ref="preview">
-    <el-upload 
-      ref="uploadRef" 
-      class="upload-demo" 
-      :on-change="changeFile"
-      :before-upload="beforeUpload"
-      :auto-upload="false"
-      action="/" 
-      >
-      <template #trigger>
-        <el-button type="primary">select file</el-button>
-      </template>
+  <div ref="preview">
+    <!-- <el-upload 
+        ref="uploadRef" 
+        class="upload-demo" 
+        :on-change="changeFile"
+        :before-upload="beforeUpload"
+        :auto-upload="false"
+        action="/" 
+        >
+        <template #trigger>
+          <el-button type="primary">select file</el-button>
+</template>
       <el-button class="ml-3" type="success" @click="submitUpload">
         upload to server
       </el-button>
-      <template #tip>
-        <div class="el-upload__tip">
-          jpg/png files with a size less than 500kb
-        </div>
-      </template>
+<template #tip>
+  <div class="el-upload__tip">
+    jpg/png files with a size less than 500kb
+  </div>
+</template>
     </el-upload>
 
     <div>
        <el-button type="primary"  @click="previewPDfTest">pdf预览</el-button>
-    </div>
+    </div> -->
     <div>
       <span>pdf预览</span>
       <input type="file" @change="previewPDf" ref="pdffile">
@@ -32,72 +32,87 @@
       <span>docx预览</span>
       <input type="file" @change="preview" ref="file">
     </div>
-    <div>
-      <iframe :src="pdfSrc" frameborder="0" style="height: 500px;width:1000px;overflow:auto;"></iframe>
-    </div>
+   
   </div>
 </template>
 <script>
   const docx = require('docx-preview');
   const jszip = require('jszip');
   export default {
-   
     data() {
       return {
         pdfSrc: ''
       }
     },
     methods: {
-      submitUpload(){
-        let uploadRef = this.$refs.uploadRef;
-        console.log('uploadRef :>> ', uploadRef,uploadRef.value);
+      async preview(e) {
+        let div = document.createElement('div');
+        div.className = 'box'
+        let file = this.$refs.file.files[0];
+        let a = await docx.renderAsync(this.$refs.file.files[0], div) // 渲染到页面预览
+        console.log('a :>> ', a);
+        this.$refs.preview.appendChild(div);
+        console.log('this.$refs.file.files[0] :>> ', this.$refs.file.files[0]);
+        await  this.$nextTick();
+        console.log( div);
+        let b = div.querySelector('.docx-wrapper')
+        let text = b.innerHTML;
+          const blob = new Blob([text]);
+          let url = URL.createObjectURL(blob);
+          let link = document.createElement('a');
+          link.href = url;
+          link.style.display = 'none';
+          link.download = 'test111.txt' ;
+          document.body.appendChild(link);
+          link.click();
+          console.log( div);
+        // this.download(this.$refs.file.files[0], 'html')
       },
-      beforeUpload(file){
+      submitUpload() {
+        let uploadRef = this.$refs.uploadRef;
+        console.log('uploadRef :>> ', uploadRef, uploadRef.value);
+      },
+      beforeUpload(file) {
         console.log('file :>>333', file);
         return false;
-
-
       },
-      changeFile(file){
-        if(file.status === 'ready'){
+      changeFile(file) {
+        if (file.status === 'ready') {
           this.file = file
         };
-    
       },
-      previewPDfTest(){
-        if(!this.file) return;
-        let {raw} = this.file;
-        console.log(' this.file :>> ',  this.file);
+      async previewPDfTest() {
+        if (!this.file) return;
+        let {
+          raw
+        } = this.file;
+        console.log(' this.file :>> ', this.file);
         console.log('pdfjsLib :>> ', pdfjsLib);
         var reader = new FileReader();
-        reader.readAsDataURL(raw);
-        reader.onload = e =>{
-           let target = e.target;
-           let getPdf = target.result;
-           this.getPdf(getPdf)
-             
-         }
+        await reader.readAsDataURL(raw);
+        console.log('reader :>> ', reader);
+        // reader.onload = e => {
+        //   let target = e.target;
+        //   let getPdf = target.result;
+        //   this.getPdf(getPdf)
+        // }
       },
-      async getPdf(result){
-       
-         pdfjsLib.getDocument(result).promise.then(res =>{
-           console.log('res :>> ', res);
-         })
-        
-        
+      async getPdf(result) {
+        pdfjsLib.getDocument(result).promise.then(res => {
+          console.log('res :>> ', res);
+        })
         // console.log('a66666 :>> ', pdf);
         // console.log(' pdf.numPages :>> ',  pdf._transport);
       },
-      preview(e) {
-        let div = document.createElement('div');
-        div.className = 'box'
-        docx.renderAsync(this.$refs.file.files[0], div) // 渲染到页面预览
-        this.$refs.preview.appendChild(div);
-        this.download(this.$refs.file.files[0], 'docx')
-      },
-      previewPDf() {
+      async previewPDf() {
         let container = this.$refs.pdffile;
         let file = container.files[0];
+        this.file = file
+          var reader = new FileReader();
+        await reader.readAsDataURL(file);
+        console.log('reader :>> ', reader);
+     
+        return
         let url = encodeURIComponent(URL.createObjectURL(file));
         this.pdfSrc = '/pdfjs/web/viewer.html?file=' + url;
         console.log('url :>> ', url);
@@ -117,20 +132,5 @@
   };
 </script>
 <style>
-  .my-component {
-    width: 100%;
-    height: 90vh;
-    border: 1px solid #000;
-  }
-  .box {
-    height: 300px;
-    width: 500px;
-    overflow: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  .box .docx-wrapper {
-    display: inherit;
-    padding: 0;
-  }
+
 </style>
