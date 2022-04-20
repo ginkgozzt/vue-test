@@ -66,10 +66,13 @@
   </div>
 </template>
 <script>
+// import PDFJS from 'pdfjs-dist/es5/build/pdf.js'
+// import * as PDFJS from 'pdfjs-dist/legacy/build/pdf.js'
+import PDFJS from 'pdfjs-dist'
 const docx = require("docx-preview");
 const jszip = require("jszip");
 const FileSaver = require("jszip/vendor/FileSaver.js");
-console.log("FileSaver :>> ", FileSaver);
+console.log('PDFJS :>> ', PDFJS);
 export default {
   data() {
     return {
@@ -166,19 +169,15 @@ export default {
       var reader = new FileReader();
       await reader.readAsDataURL(raw);
       console.log("reader :>> ", reader);
-      // reader.onload = e => {
-      //   let target = e.target;
-      //   let getPdf = target.result;
-      //   this.getPdf(getPdf)
-      // }
+      let result = reader.result;
+      console.log('result :>> ', result);
+      reader.onload = e => {
+        let target = e.target;
+        let result = target.result;
+        this.getPdf(result)
+      }
     },
-    async getPdf(result) {
-      pdfjsLib.getDocument(result).promise.then((res) => {
-        console.log("res :>> ", res);
-      });
-      // console.log('a66666 :>> ', pdf);
-      // console.log(' pdf.numPages :>> ',  pdf._transport);
-    },
+  
     async previewPDf() {
       let container = this.$refs.pdffile;
       let file = container.files[0];
@@ -186,11 +185,29 @@ export default {
       var reader = new FileReader();
       await reader.readAsDataURL(file);
       console.log("reader :>> ", reader);
+      let result = reader.result;
+      console.log('result :>> ', reader,result);
+      reader.onload = e => {
+        let target = e.target;
+        let result = target.result;
+        this.getPdf(result)
+      };
+      //  this.getPdf(this.file)
       return;
       let url = encodeURIComponent(URL.createObjectURL(file));
       this.pdfSrc = "/pdfjs/web/viewer.html?file=" + url;
       console.log("url :>> ", url);
       this.download(file, "pdf");
+    },
+    async getPdf(result) {
+      let res = await PDFJS.getDocument(result);
+      console.log('res :>>5555 ', res);
+     console.log(res.numPages);
+      // PDFJS.getDocument(result).promise.then((res) => {
+      //   console.log("res :>> ", res);
+      // });
+      // console.log('a66666 :>> ', pdf);
+      // console.log(' pdf.numPages :>> ',  pdf._transport);
     },
     download(file, type) {
       let url = URL.createObjectURL(file);

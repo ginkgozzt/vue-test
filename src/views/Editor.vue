@@ -9,6 +9,10 @@
       type="primary"
       @click="insertContent"
     >插入节点</el-button>
+      <el-button
+      type="primary"
+      @click="reset"
+    >重置</el-button>
     <div id="textarea"></div>
   </div>
 </template>
@@ -54,7 +58,7 @@ export default {
           .init({
             selector: "#textarea",
             //skin:'oxide-dark',
-            text: "44444444444",
+            content:'44555',
             branding: false,
             language: "zh_CN",
             plugins:
@@ -162,6 +166,9 @@ export default {
     
       console.log('tinymce :>> ', this.tinymce);
 
+    },
+    reset(){
+      this.tinymce.reset()
     },
     download(file, type) {
       let url = URL.createObjectURL(file);
