@@ -10,6 +10,7 @@
     "@packy-tang/vue-tinymce": "^2.0.0-beta.1",
     "docx-preview": "^0.1.9",
     "element-plus": "^2.1.7",
+    "gojs": "^2.2.7",
     "jszip": "^3.8.0",
     "pdfjs-dist": "^2.2.228",
     "tinymce": "^6.0.1",

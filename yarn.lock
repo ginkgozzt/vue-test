@@ -3001,6 +3001,11 @@
     "pify" "^4.0.1"
     "slash" "^2.0.0"
 
+"gojs@^2.2.7":
+  "integrity" "sha512-X9E7DzfRY9rfmoqL9lezdzaPwnTApZr2Wjh089N2GL0GjNslpjA+3gxd3BH1ZjyvR6wZPNjKsH0st3M6Oi7wOA=="
+  "resolved" "https://registry.npmmirror.com/gojs/-/gojs-2.2.7.tgz"
+  "version" "2.2.7"
+
 "graceful-fs@^4.1.11", "graceful-fs@^4.1.15", "graceful-fs@^4.1.2", "graceful-fs@^4.1.6":
   "integrity" "sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ=="
   "resolved" "https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.9.tgz"

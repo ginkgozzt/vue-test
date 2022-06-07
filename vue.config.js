@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/zzt',
+  publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   configureWebpack:{
